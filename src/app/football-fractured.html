@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FOOTBALL: FRACTURED — TVA Timeline Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0502;--brown:#1a0e06;--brown2:#2b1809;--amber:#ff8a1f;--amber2:#d9812e;--dim:#7d4b22;--text:#f0b068;
+  --disp:"Chakra Petch","Eurostile","Arial Narrow",sans-serif;--mono:"VT323","Courier New",monospace;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 40%,#1f1107 0,var(--bg) 70%);color:var(--text);font-family:var(--mono);font-size:21px;line-height:1.2;overflow-x:hidden}
+/* CRT layers */
+.crt{position:fixed;inset:0;pointer-events:none;z-index:50}
+.scan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px)}
+.sweep{background:linear-gradient(180deg,transparent 0,rgba(255,138,31,.07) 50%,transparent 100%);height:140px;inset:auto 0 auto 0;top:-140px;animation:sweep 7s linear infinite}
+.vig{background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.65) 100%)}
+.flick{background:rgba(255,138,31,.03);animation:flick 5s steps(1) infinite}
+@keyframes sweep{to{transform:translateY(calc(100vh + 280px))}}
+@keyframes flick{0%,100%{opacity:0}4%{opacity:1}5%{opacity:0}47%{opacity:0}48%{opacity:.8}49%{opacity:0}51%{opacity:1}52%{opacity:0}}
+/* background */
+.bg{position:fixed;inset:0;z-index:0;opacity:.5;
+  background-image:linear-gradient(var(--brown2) 1px,transparent 1px),linear-gradient(90deg,var(--brown2) 1px,transparent 1px);
+  background-size:48px 48px;animation:drift 40s linear infinite;mask-image:radial-gradient(ellipse at center,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 20%,transparent 75%)}
+@keyframes drift{to{background-position:48px 48px}}
+.ring{position:fixed;left:50%;top:48%;width:min(120vh,130vw);aspect-ratio:1;transform:translate(-50%,-50%);z-index:0;opacity:.35;pointer-events:none}
+.ring svg{width:100%;height:100%;animation:spin 140s linear infinite}
+.ring .r2{animation:spin 90s linear infinite reverse;transform-origin:50% 50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* stage */
+.stage{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;padding:14px clamp(12px,2.5vw,32px) 0;animation:crton 1.3s cubic-bezier(.7,0,.2,1) both}
+@keyframes crton{0%{clip-path:inset(49.5% 0 49.5% 0);filter:brightness(3)}45%{clip-path:inset(49.5% 0 49.5% 0);filter:brightness(3)}100%{clip-path:inset(0);filter:none}}
+.frame{border:1px solid var(--amber2);position:relative;box-shadow:0 0 14px rgba(255,138,31,.35),inset 0 0 22px rgba(255,138,31,.12);animation:glow 4s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 24px rgba(255,138,31,.6),inset 0 0 30px rgba(255,138,31,.2)}}
+.c{position:absolute;width:14px;height:14px;border:2px solid var(--amber)}
+.c.tl{top:-4px;left:-4px;border-right:0;border-bottom:0}.c.tr{top:-4px;right:-4px;border-left:0;border-bottom:0}
+.c.bl{bottom:-4px;left:-4px;border-right:0;border-top:0}.c.br{bottom:-4px;right:-4px;border-left:0;border-top:0}
+/* header */
+header{display:flex;justify-content:space-between;align-items:stretch;gap:12px;margin-bottom:14px}
+.logo{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 10px;background:var(--brown)}
+.logo svg{width:46px;height:46px;flex:none}
+.wm{font-family:var(--disp);font-weight:700;letter-spacing:.14em;color:var(--amber);line-height:1;text-shadow:0 0 8px rgba(255,138,31,.7)}
+.wm b{display:block;font-size:clamp(17px,2.4vw,26px)}
+.wm i{display:block;font-style:normal;font-weight:500;font-size:clamp(10px,1.3vw,13px);letter-spacing:.5em;color:var(--amber2);margin-top:4px}
+.status{display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--brown);text-align:right}
+.status small{display:block;color:var(--dim);font-size:17px}
+.status strong{font-family:var(--disp);font-weight:600;letter-spacing:.16em;color:var(--amber);font-size:clamp(14px,1.8vw,19px);text-shadow:0 0 8px rgba(255,138,31,.7)}
+.dot{width:12px;height:12px;background:var(--amber);box-shadow:0 0 10px var(--amber);animation:pulse 1.6s ease-in-out infinite;flex:none}
+@keyframes pulse{50%{opacity:.25}}
+/* grid */
+main{flex:1;display:grid;grid-template-columns:230px minmax(0,1fr) 250px;gap:14px;align-items:stretch}
+.rail{background:rgba(26,14,6,.8);padding:12px 14px;font-size:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.rail h3{margin:0;font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.28em;color:var(--amber);border-bottom:1px dashed var(--dim);padding-bottom:6px}
+.row{display:flex;justify-content:space-between;gap:8px;color:var(--text)}
+.row span:first-child{color:var(--dim)}
+.bar{height:10px;border:1px solid var(--amber2);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;width:50%;background:repeating-linear-gradient(90deg,var(--amber) 0 5px,transparent 5px 7px);transition:width 1.2s}
+.log{flex:1;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;min-height:150px;font-size:17px;color:var(--amber2)}
+.log div{animation:in .5s both;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.log .w{color:var(--amber)}
+@keyframes in{from{opacity:0;transform:translateX(8px)}}
+.glyphs{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}
+.glyphs i{aspect-ratio:1;border:1px solid var(--dim);animation:blink 3s steps(1) infinite}
+.glyphs i:nth-child(3n){animation-delay:.7s;background:var(--dim)}.glyphs i:nth-child(5n){animation-delay:1.9s;background:var(--amber)}.glyphs i:nth-child(7n){animation-delay:1.2s}
+@keyframes blink{50%{opacity:.2}}
+/* centre */
+.core{padding:clamp(20px,4vw,52px) clamp(14px,3vw,44px);background:rgba(10,5,2,.72);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-width:0}
+.tag{color:var(--dim);font-size:19px;letter-spacing:.12em;margin:0 0 14px}
+h1{margin:0;font-family:var(--disp);font-weight:700;font-size:clamp(34px,6.6vw,88px);line-height:.98;letter-spacing:.04em;color:var(--amber);text-shadow:0 0 6px rgba(255,138,31,.9),0 0 28px rgba(255,138,31,.45);text-transform:uppercase}
+h1 span{display:block}
+.glitch{animation:glitch 9s steps(1) infinite}
+@keyframes glitch{0%,93%,100%{transform:none;text-shadow:0 0 6px rgba(255,138,31,.9),0 0 28px rgba(255,138,31,.45)}94%{transform:translateX(-4px);text-shadow:3px 0 #ff3b1f,-3px 0 #ffd27a}95%{transform:translateX(3px)}96%{transform:none}}
+.term{width:min(100%,780px);margin:clamp(22px,4vw,40px) 0 0;background:var(--brown);text-align:left;padding:0}
+.term .bar2{display:flex;justify-content:space-between;padding:6px 12px;border-bottom:1px solid var(--amber2);color:var(--dim);font-size:17px;letter-spacing:.1em}
+.in{position:relative;padding:16px 16px 18px;min-height:96px;display:flex;gap:10px;font-size:clamp(24px,3.4vw,32px);cursor:text}
+.pr{color:var(--amber);flex:none;text-shadow:0 0 8px var(--amber)}
+.mir{flex:1;white-space:pre-wrap;word-break:break-word;color:var(--text);text-shadow:0 0 6px rgba(240,176,104,.6)}
+.mir.ph{color:#7a5230;text-shadow:none}
+.cur{display:inline-block;width:.55em;height:1em;background:var(--amber);vertical-align:-.12em;margin-left:2px;box-shadow:0 0 10px var(--amber);animation:cur 1s steps(1) infinite}
+@keyframes cur{50%{opacity:0}}
+.in textarea{position:absolute;inset:0;width:100%;height:100%;opacity:0;resize:none;border:0;font:inherit;cursor:text}
+.go{position:relative;display:block;width:100%;border:0;border-top:1px solid var(--amber2);background:var(--amber);color:#1a0b02;font-family:var(--disp);font-weight:700;letter-spacing:.3em;font-size:clamp(14px,2vw,18px);padding:15px 10px;cursor:pointer;overflow:hidden;transition:background .15s,color .15s}
+.go::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%);animation:shine 4.5s ease-in-out infinite}
+@keyframes shine{60%,100%{transform:translateX(120%)}}
+.go:hover{background:#ffa84a;box-shadow:0 0 26px rgba(255,138,31,.8)}
+.go:active{background:var(--text)}
+.go:disabled{cursor:wait;background:var(--dim)}
+:focus-visible{outline:2px dashed var(--text);outline-offset:3px}
+.msg{min-height:26px;margin:10px 0 0;color:var(--amber);font-size:19px;letter-spacing:.06em;width:min(100%,780px);text-align:left}
+.ex{width:min(100%,780px);margin-top:14px;text-align:left}
+.ex h2{margin:0 0 6px;font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:.3em;color:var(--dim);font-weight:500}
+.ex ul{list-style:none;margin:0;padding:0;border-top:1px dashed var(--dim)}
+.ex button{all:unset;box-sizing:border-box;display:flex;gap:12px;width:100%;padding:7px 8px;border-bottom:1px dashed var(--dim);color:var(--amber2);font-size:21px;cursor:pointer;transition:background .15s,color .15s,padding .15s}
+.ex button b{color:var(--dim);font-weight:400;flex:none}
+.ex button:hover,.ex button:focus-visible{background:rgba(255,138,31,.13);color:var(--amber);padding-left:16px}
+.ex button:hover b{color:var(--amber)}
+/* footer */
+footer{margin-top:14px;display:flex;align-items:center;border:1px solid var(--dim);border-bottom:0;background:var(--brown);font-size:18px;color:var(--amber2)}
+.snd{all:unset;box-sizing:border-box;flex:none;padding:7px 16px;border-right:1px solid var(--dim);cursor:pointer;color:var(--amber);letter-spacing:.12em;display:flex;gap:8px;align-items:center}
+.snd:hover,.snd:focus-visible{background:var(--amber);color:#1a0b02}
+.snd .eq{display:flex;gap:2px;align-items:flex-end;height:14px}.snd .eq i{width:3px;background:currentColor;animation:eq .9s ease-in-out infinite}
+.snd .eq i:nth-child(2){animation-delay:.2s}.snd .eq i:nth-child(3){animation-delay:.45s}
+.snd[aria-pressed=false] .eq i{animation:none;height:3px}
+@keyframes eq{0%,100%{height:3px}50%{height:14px}}
+.tk{flex:1;overflow:hidden;white-space:nowrap}
+.tk div{display:inline-block;padding-left:100%;animation:tk 60s linear infinite}
+@keyframes tk{to{transform:translateX(-100%)}}
+.clock{flex:none;padding:7px 16px;border-left:1px solid var(--dim);color:var(--amber)}
+@media(max-width:1020px){main{grid-template-columns:minmax(0,1fr)}.rail{display:none}}
+@media(max-width:560px){body{font-size:19px}.status small{display:none}.clock{display:none}.logo svg{width:36px;height:36px}.logo{padding-right:10px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}.sweep,.flick{display:none}.tk div{animation:none;padding-left:0}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="ring" aria-hidden="true">
+<svg viewBox="0 0 400 400" fill="none" stroke="#ff8a1f" stroke-width=".6">
+<circle cx="200" cy="200" r="196" stroke-dasharray="2 6"/><circle cx="200" cy="200" r="170" stroke-dasharray="40 8 4 8"/>
+<g class="r2"><polygon points="200,40 313,87 360,200 313,313 200,360 87,313 40,200 87,87" stroke-width=".8"/><circle cx="200" cy="200" r="118" stroke-dasharray="1 4"/></g>
+<g id="ticks"></g></svg></div>
+
+<div class="stage">
+<header>
+  <div class="frame logo"><i class="c tl"></i><i class="c br"></i>
+    <svg viewBox="0 0 48 48" fill="none" stroke="#ff8a1f" stroke-width="2" aria-hidden="true"><polygon points="24,2 46,24 24,46 2,24"/><circle cx="24" cy="24" r="12"/><path d="M24 12v12l8 5M2 24h10M36 24h10"/><path d="M14 8l-6 6M34 8l6 6" stroke-width="1"/></svg>
+    <div class="wm"><b>FOOTBALL: FRACTURED</b><i>TIME VARIANCE ARCHIVE</i></div></div>
+  <div class="frame status"><i class="c tr"></i><i class="c bl"></i>
+    <div><small>TERMINAL 7-FF · SACRED TIMELINE</small><strong>SYSTEM STATUS — ACTIVE</strong></div><span class="dot"></span></div>
+</header>
+
+<main>
+  <aside class="frame rail" aria-label="Timeline monitors"><i class="c tl"></i><i class="c br"></i>
+    <h3>TEMPORAL INTEGRITY</h3>
+    <div><div class="row"><span>SACRED</span><span id="v1">99.7%</span></div><div class="bar"><i id="b1" style="width:99%"></i></div></div>
+    <div><div class="row"><span>VARIANCE</span><span id="v2">00.3%</span></div><div class="bar"><i id="b2" style="width:3%"></i></div></div>
+    <div><div class="row"><span>NEXUS LOAD</span><span id="v3">41%</span></div><div class="bar"><i id="b3" style="width:41%"></i></div></div>
+    <h3>BRANCH REGISTER</h3>
+    <div class="row"><span>ACTIVE BRANCHES</span><span id="br">0000</span></div>
+    <div class="row"><span>PRUNED TODAY</span><span id="pr">0000</span></div>
+    <div class="row"><span>ARCHIVE</span><span>1863–NOW</span></div>
+    <h3>TEMPAD SIGNALS</h3><div class="glyphs" id="gl"></div>
+  </aside>
+
+  <section class="frame core" aria-labelledby="h"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+    <p class="tag">ANOMALY INTAKE · OPEN FILE</p>
+    <h1 id="h" class="glitch"><span>What if football</span><span>took another path?</span></h1>
+
+    <form class="frame term" id="f" autocomplete="off"><i class="c tl"></i><i class="c br"></i>
+      <div class="bar2"><span>TIMELINE REQUEST</span><span>MAX 140 CHR</span></div>
+      <label class="in" id="box"><span class="pr" aria-hidden="true">&gt;_</span>
+        <div class="mir ph" id="mir" aria-hidden="true"></div>
+        <span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden">Describe your what-if scenario</span>
+        <textarea id="t" maxlength="140" rows="2" spellcheck="false" aria-label="Describe your what-if scenario" placeholder="What if Ronaldo never left Real Madrid?"></textarea>
+      </label>
+      <button class="go" id="go" type="submit">CREATE NEW TIMELINE</button>
+    </form>
+    <p class="msg" id="msg" role="status"></p>
+
+    <div class="ex"><h2>LOGGED VARIANCES — SELECT TO LOAD</h2>
+      <ul id="exl"></ul></div>
+  </section>
+
+  <aside class="frame rail" aria-label="Event log"><i class="c tr"></i><i class="c bl"></i>
+    <h3>VARIANCE LOG</h3>
+    <div class="log" id="log" aria-live="off"></div>
+    <h3>SCAN</h3>
+    <div class="row"><span>SECTOR</span><span>PITCH-04</span></div>
+    <div class="row"><span>CLOCK DRIFT</span><span id="dr">+0.002s</span></div>
+  </aside>
+</main>
+
+<footer>
+  <button class="snd" id="snd" type="button" aria-pressed="true"><span class="eq"><i></i><i></i><i></i></span><span id="sl">AUDIO ON</span></button>
+  <div class="tk"><div>TVA NOTICE: ALL BRANCHES ARE SUBJECT TO PRUNING &nbsp;///&nbsp; THE SACRED TIMELINE MUST BE PRESERVED &nbsp;///&nbsp; ANOMALOUS TRANSFERS, RED CARDS AND LATE WINNERS FLAGGED FOR REVIEW &nbsp;///&nbsp; FILE ALL WHAT-IFS WITH YOUR LOCAL VARIANCE OFFICER &nbsp;///&nbsp; FOR ALL TIME. ALWAYS.</div></div>
+  <div class="clock" id="ck">00:00:00</div>
+</footer>
+</div>
+<div class="crt vig"></div><div class="crt scan"></div><div class="crt sweep"></div><div class="crt flick"></div>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+/* ---------- audio (synthesised, no files) ---------- */
+var on=true,ctx=null;
+function ac(){if(!on)return null;if(!ctx){try{ctx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}}
+  if(ctx.state==="suspended")ctx.resume();return ctx}
+function tone(f,d,type,v,to,at){var c=ac();if(!c)return;var t=c.currentTime+(at||0),o=c.createOscillator(),g=c.createGain();
+  o.type=type||"square";o.frequency.setValueAtTime(f,t);if(to)o.frequency.exponentialRampToValueAtTime(to,t+d);
+  g.gain.setValueAtTime(v||.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+d+.02)}
+var S={
+  click:function(){tone(1200,.05,"square",.05,600);tone(300,.12,"sawtooth",.04,150,.03)},
+  key:function(){tone(1500+Math.random()*500,.025,"square",.025)},
+  hover:function(){tone(620,.05,"sine",.025,700)},
+  load:function(){tone(500,.07,"square",.04);tone(750,.07,"square",.04,0,.07);tone(1000,.1,"square",.04,0,.14)},
+  confirm:function(){[440,660,880,1320].forEach(function(f,i){tone(f,.14,"square",.05,0,i*.09)});tone(110,.7,"sawtooth",.05,55,.1)},
+  toggle:function(){tone(on?900:300,.08,"triangle",.06)},
+  boot:function(){tone(60,1.1,"sawtooth",.05,180);tone(900,.05,"square",.03,0,.9)}
+};
+var started=false;
+function unlock(){if(started)return;started=true;S.boot()}
+["pointerdown","keydown"].forEach(function(e){addEventListener(e,unlock,{once:true})});
+
+/* ---------- prompt ---------- */
+var t=$("t"),mir=$("mir"),PH=t.placeholder;
+function draw(){var v=t.value;mir.className="mir"+(v?"":" ph");
+  mir.textContent=v||PH;mir.appendChild(Object.assign(document.createElement("span"),{className:"cur"}));
+  if(!v){mir.firstChild.textContent=PH;}}
+function drawSafe(){var v=t.value,txt=v||PH;mir.className="mir"+(v?"":" ph");
+  mir.innerHTML="";mir.appendChild(document.createTextNode(txt));var c=document.createElement("span");c.className="cur";mir.appendChild(c)}
+draw=drawSafe;draw();
+t.addEventListener("input",function(){S.key();draw()});
+t.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();$("f").requestSubmit()}});
+$("box").addEventListener("click",function(){t.focus()});
+setTimeout(function(){t.focus({preventScroll:true})},1400);
+
+/* ---------- examples ---------- */
+var EX=["What if Messi never left Barcelona?","What if Leicester City had lost the 2016 title race?","What if Zidane never headbutted Materazzi?","What if Liverpool never won in Istanbul?","What if Maradona had signed for Real Madrid?","What if the Premier League never existed?"];
+var ul=$("exl");
+EX.forEach(function(s,i){var li=document.createElement("li"),b=document.createElement("button");b.type="button";
+  b.innerHTML="<b>V-"+String(i+1).padStart(2,"0")+"</b><span></span>";b.lastChild.textContent=s;
+  b.addEventListener("mouseenter",S.hover);b.addEventListener("click",function(){S.load();type(s)});li.appendChild(b);ul.appendChild(li)});
+var tm;function type(s){clearInterval(tm);t.value="";var i=0;draw();t.focus({preventScroll:true});
+  tm=setInterval(function(){t.value=s.slice(0,++i);draw();if(i%2)S.key();if(i>=s.length)clearInterval(tm)},22)}
+
+/* ---------- submit (front-end only) ---------- */
+var msg=$("msg"),go=$("go"),busy=false;
+$("go").addEventListener("mouseenter",S.hover);
+$("f").addEventListener("submit",function(e){e.preventDefault();if(busy)return;
+  var v=t.value.trim();S.click();
+  if(!v){msg.textContent="> ERROR: NO ANOMALY DESCRIBED. ENTER A WHAT-IF.";msg.style.color="#ff5a2a";t.focus();return}
+  msg.style.color="";busy=true;go.disabled=true;
+  var steps=["> LOGGING VARIANCE REQUEST...","> CROSS-REFERENCING SACRED TIMELINE...","> BRANCH POINT LOCATED.","> REQUEST FILED. TIMELINE ENGINE OFFLINE IN THIS BUILD."],i=0;
+  (function n(){msg.textContent=steps[i];S.key();i++;if(i<steps.length)setTimeout(n,650);else{S.confirm();setTimeout(function(){busy=false;go.disabled=false},900)}})();
+  addLog("REQUEST FILED: "+v.slice(0,22).toUpperCase(),true)});
+
+/* ---------- sound toggle ---------- */
+var sb=$("snd");sb.addEventListener("click",function(){on=!on;sb.setAttribute("aria-pressed",on);$("sl").textContent=on?"AUDIO ON":"AUDIO OFF";if(on)S.toggle()});
+sb.addEventListener("mouseenter",S.hover);
+
+/* ---------- live readouts ---------- */
+var LG=["BRANCH 1999 UCL FINAL: STABLE","NEXUS EVENT: LATE WINNER 90+3","TRANSFER ANOMALY AT 02:14","OFFSIDE LINE DRIFT DETECTED","VAR REVIEW LOOP: 0 FOUND","BRANCH 2005 ISTANBUL: STABLE","PENALTY MISS: VARIANCE +0.1","TEMPAD 4471 PINGED","DERBY TIMELINE: DIVERGING","MANAGER SACKED: BRANCH SPAWNED","FIXTURE LIST: CHECKSUM OK","CROWD NOISE SPIKE: STADIUM-09"];
+var log=$("log");function addLog(s,w){var d=document.createElement("div");d.textContent="> "+s;if(w)d.className="w";log.appendChild(d);while(log.children.length>9)log.removeChild(log.firstChild)}
+for(var k=0;k<5;k++)addLog(LG[k]);
+setInterval(function(){addLog(LG[Math.floor(Math.random()*LG.length)])},2600);
+var gl=$("gl");for(var g=0;g<32;g++)gl.appendChild(document.createElement("i"));
+var br=0x2a1,pr=0x37;
+function rnd(a,b){return a+Math.random()*(b-a)}
+setInterval(function(){var s=rnd(97.2,99.9),vr=100-s;
+  $("v1").textContent=s.toFixed(1)+"%";$("b1").style.width=s+"%";
+  $("v2").textContent=vr.toFixed(1)+"%";$("b2").style.width=(vr*3)+"%";
+  var l=Math.round(rnd(30,78));$("v3").textContent=l+"%";$("b3").style.width=l+"%";
+  $("dr").textContent="+"+rnd(0,.009).toFixed(3)+"s";
+  if(Math.random()<.5)br+=1;if(Math.random()<.3)pr+=1;
+  $("br").textContent=String(br).padStart(4,"0");$("pr").textContent=String(pr).padStart(4,"0")},1800);
+function tick(){var d=new Date();$("ck").textContent=[d.getHours(),d.getMinutes(),d.getSeconds()].map(function(n){return String(n).padStart(2,"0")}).join(":")}
+tick();setInterval(tick,1000);
+/* ring ticks */
+var tk=$("ticks"),h="";for(var a=0;a<120;a++){var r=a*3*Math.PI/180,l=a%10===0?12:5;
+  h+='<line x1="'+(200+Math.sin(r)*196)+'" y1="'+(200-Math.cos(r)*196)+'" x2="'+(200+Math.sin(r)*(196-l))+'" y2="'+(200-Math.cos(r)*(196-l))+'"/>'}
+tk.innerHTML=h;
+/* click sound on any other button-like interaction */
+document.querySelectorAll("button:not(.go):not(.ex button)").forEach(function(b){});
+})();
+</script>
+</body>
+</html>
